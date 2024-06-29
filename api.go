@@ -9,10 +9,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func test(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("test"))
-}
-
 func WriteJSON(w http.ResponseWriter, status int, v any) error {
 	w.WriteHeader(status)
 	w.Header().Set("Content-Type", "application/json")
@@ -47,6 +43,7 @@ func (s *APIserver) Run() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/account", makeHTTPHandlerFunc(s.handleAccount))
+	router.HandleFunc("/account/{id}", makeHTTPHandlerFunc(s.handleGetAccount))
 
 	log.Println("Server running on port: ", s.listenAddr)
 
@@ -67,7 +64,11 @@ func (s *APIserver) handleAccount(w http.ResponseWriter, r *http.Request) error 
 }
 
 func (s *APIserver) handleGetAccount(w http.ResponseWriter, r *http.Request) error {
-	return nil
+	id := mux.Vars(r)["id"]
+
+	fmt.Println(id)
+
+	return WriteJSON(w, http.StatusOK, &Account{})
 }
 
 func (s *APIserver) handleCreateAccount(w http.ResponseWriter, r *http.Request) error {
