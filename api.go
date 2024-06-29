@@ -9,6 +9,10 @@ import (
 	"github.com/gorilla/mux"
 )
 
+func test(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("test"))
+}
+
 func WriteJSON(w http.ResponseWriter, status int, v any) error {
 	w.WriteHeader(status)
 	w.Header().Set("Content-Type", "application/json")
