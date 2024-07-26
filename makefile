@@ -7,4 +7,7 @@ migrateforce:
 migratedown: migrateforce
 	migrate -path db/migration -database "postgresql://postgres:pass@localhost:5431/postgres?sslmode=disable" -verbose down
 
-.PHONY: migrateup migratedown migrateforce
+sqlc:
+	sqlc generate
+
+.PHONY: migrateup migratedown migrateforce sqlc
