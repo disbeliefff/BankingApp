@@ -10,4 +10,9 @@ migratedown: migrateforce
 sqlc:
 	sqlc generate
 
+test:
+	go test -v -cover ./...
+
 .PHONY: migrateup migratedown migrateforce sqlc
+
+all: test
