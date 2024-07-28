@@ -37,7 +37,7 @@ jobs:
       id: go
 
     - name: Run migrations
-      run: make build
+      run: make migrateup
 
     - name: Test
       run: make test
